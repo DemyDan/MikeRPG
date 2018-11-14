@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour {
 
     void Update()
     {
+        Cursor.visible = false;
         Move();
     }
 

@@ -16,22 +16,7 @@ public class Interact : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-            
-        if(playerHasWeapon)
-        {
-            if(Input.GetMouseButtonDown(0))
-            {
-                RaycastHit hit;
-
-                int layermask = LayerMask.GetMask("Enemy");
-
-                if(Physics.Raycast(transform.position,transform.forward,out hit,10f,layermask))
-                {
-                    Debug.Log("Hit");
-                }
-                Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.yellow);
-            }
-        }
+           
 
 	}
 
