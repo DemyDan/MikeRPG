@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour {
 
     void Update()
     {
-        Cursor.visible = false;
+        ControlCursor();
         Move();
     }
 
@@ -67,5 +67,16 @@ public class PlayerController : MonoBehaviour {
 
         //Pak de rotatie van de player en maak die op de y as hetzelfde als die van de camera
         transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y, 0);
+    }
+
+    void ControlCursor()
+    {
+        Cursor.visible = false;
+
+        if (Input.GetKey(KeyCode.Escape))
+            Cursor.lockState = CursorLockMode.None; 
+        else
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.lockState = CursorLockMode.Locked;
     }
 }

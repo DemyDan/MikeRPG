@@ -7,7 +7,9 @@ public class BowWeapon : MonoBehaviour {
     public Rigidbody bullet;
     public GameObject weaponPlace;
     public int arrowSpeed;
+    public float secondsBetweenShots;
 
+    private float timestamp;
     private Vector3 shootPoint;
     private GameObject player;
 
@@ -25,7 +27,7 @@ public class BowWeapon : MonoBehaviour {
         }
 
 
-        if(Input.GetButtonDown("Fire1") && player.GetComponent<Interact>().playerHasWeapon)
+        if(Input.GetButtonDown("Fire1") && player.GetComponent<Interact>().playerHasWeapon && player.GetComponent<Interact>().playerHasBow && Time.time >= timestamp)
         {
             shootPoint = weaponPlace.transform.position;
 
@@ -33,6 +35,7 @@ public class BowWeapon : MonoBehaviour {
 
             arrow.AddForce(arrowSpeed * -transform.forward);
 
+            timestamp = Time.time + secondsBetweenShots;
         }
     }
 }

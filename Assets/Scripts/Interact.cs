@@ -6,6 +6,9 @@ public class Interact : MonoBehaviour {
 
     public bool playerIsWithItem = false;
     public bool playerHasWeapon = false;
+    public bool playerHasBow = false;
+    public bool playerHasSword = false;
+    public bool playerHasWand = false;
     public bool pressedE = false;
     public Transform weaponPlace;
 
@@ -22,7 +25,7 @@ public class Interact : MonoBehaviour {
 
     void OnTriggerStay (Collider other)
     {
-        if(other.CompareTag("Item"))
+        if(other.CompareTag("Bow") || other.CompareTag("Sword") || other.CompareTag("Wand"))
         {
             playerIsWithItem = true;
         }
@@ -31,7 +34,19 @@ public class Interact : MonoBehaviour {
         {
             if(Input.GetKeyDown("e"))
             {
-                playerHasWeapon = true;
+                if (other.CompareTag("Bow"))
+                {
+                    playerHasBow = true;
+                }
+                else if (other.CompareTag("Sword"))
+                {
+                    playerHasSword = true;
+                }
+                else if (other.CompareTag("Wand"))
+                {
+                    playerHasWand = true;
+                }
+                    playerHasWeapon = true;
                 other.gameObject.transform.position = weaponPlace.transform.position;
                 other.gameObject.transform.rotation = weaponPlace.rotation;
                 other.gameObject.transform.parent = weaponPlace.transform;
@@ -41,7 +56,7 @@ public class Interact : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Item"))
+        if (other.CompareTag("Bow") || other.CompareTag("Sword") || other.CompareTag("Wand"))
         {
             playerIsWithItem = false;
         }

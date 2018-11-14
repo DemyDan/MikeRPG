@@ -7,8 +7,9 @@ public class MeleeWeapon : MonoBehaviour {
     Enemy enemy;
 
     public int damage;
-    public int timeBetween;
+    public float secondsBetweenShots;
 
+    private float timestamp;
     private GameObject player;
 
 	// Use this for initialization
@@ -24,7 +25,7 @@ public class MeleeWeapon : MonoBehaviour {
             GetComponent<ItemPickUp>().enabled = false;
         }   
 
-        if (Input.GetButtonDown("Fire1") && player.GetComponent<Interact>().playerHasWeapon)
+        if (Input.GetButtonDown("Fire1") && player.GetComponent<Interact>().playerHasWeapon && player.GetComponent<Interact>().playerHasSword && Time.time >= timestamp)
         {
             RaycastHit hit;
 
@@ -36,6 +37,9 @@ public class MeleeWeapon : MonoBehaviour {
                 enemy.Damage(damage);
                 Debug.Log("Hit");
             }
+
+            timestamp = Time.time + secondsBetweenShots;
+
             Debug.DrawRay(player.transform.position, player.transform.forward * hit.distance, Color.yellow);
         }
     }
