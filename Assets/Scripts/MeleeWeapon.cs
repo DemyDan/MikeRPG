@@ -23,7 +23,11 @@ public class MeleeWeapon : MonoBehaviour {
         if(player.GetComponent<Interact>().playerHasWeapon)
         {
             GetComponent<ItemPickUp>().enabled = false;
-        }   
+
+        }else if(!player.GetComponent<Interact>().playerHasWeapon)
+        {
+            GetComponent<ItemPickUp>().enabled = true;
+        }
 
         if (Input.GetButtonDown("Fire1") && player.GetComponent<Interact>().playerHasWeapon && player.GetComponent<Interact>().playerHasSword && Time.time >= timestamp)
         {

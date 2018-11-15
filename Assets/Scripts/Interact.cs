@@ -11,6 +11,7 @@ public class Interact : MonoBehaviour {
     public bool playerHasWand = false;
     public bool pressedE = false;
     public Transform weaponPlace;
+    public Transform weaponDrop;
 
 	// Use this for initialization
 	void Start () {
@@ -19,9 +20,22 @@ public class Interact : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-           
-
+        DropWeapon();
 	}
+
+    void DropWeapon()
+    {
+        if (Input.GetKeyDown("q") && playerHasWeapon)
+        {
+            weaponPlace.GetChild(0).transform.position = weaponDrop.transform.position;
+            weaponPlace.DetachChildren();
+
+            playerHasWeapon = false;
+            playerHasBow = false;
+            playerHasSword = false;
+            playerHasWand = false;
+        }
+    }
 
     void OnTriggerStay (Collider other)
     {

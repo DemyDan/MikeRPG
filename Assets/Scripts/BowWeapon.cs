@@ -20,14 +20,26 @@ public class BowWeapon : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        PickUpText();
+        Shoot();
+    }
+
+    void PickUpText()
+    {
         //Als de wapen opgepakt is dan ItemPickUp uitzetten
         if (player.GetComponent<Interact>().playerHasWeapon)
         {
             GetComponent<ItemPickUp>().enabled = false;
         }
+        else if (!player.GetComponent<Interact>().playerHasWeapon)
+        {
+            GetComponent<ItemPickUp>().enabled = true;
+        }
+    }
 
-
-        if(Input.GetButtonDown("Fire1") && player.GetComponent<Interact>().playerHasWeapon && player.GetComponent<Interact>().playerHasBow && Time.time >= timestamp)
+    void Shoot()
+    {
+        if (Input.GetButtonDown("Fire1") && player.GetComponent<Interact>().playerHasWeapon && player.GetComponent<Interact>().playerHasBow && Time.time >= timestamp)
         {
             shootPoint = weaponPlace.transform.position;
 

@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour {
     public float gravity;
     public float speed;
     public float playerStill;
+    public const int maxHP = 100;
+    public int currentHP = maxHP;
+    public RectTransform hpBar;
 
     Vector3 movement;
 
@@ -78,5 +81,12 @@ public class PlayerController : MonoBehaviour {
         else
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void Damage(int damage)
+    {
+        currentHP -= damage;
+
+        hpBar.sizeDelta = new Vector2(currentHP * 2, hpBar.sizeDelta.y);
     }
 }
