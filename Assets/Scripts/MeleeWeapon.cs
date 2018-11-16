@@ -39,7 +39,7 @@ public class MeleeWeapon : MonoBehaviour {
             {
                 enemy = hit.collider.GetComponent<Enemy>();
                 enemy.Damage(damage);
-                Debug.Log("Hit");
+                Debug.Log("MeleeHit");
             }
 
             timestamp = Time.time + secondsBetweenShots;

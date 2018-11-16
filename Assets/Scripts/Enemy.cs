@@ -9,15 +9,16 @@ public class Enemy : MonoBehaviour {
     NavMeshAgent agent;
     PlayerController hero;
 
-    public const int maxHP = 100;
-    public int currentHP = maxHP;
+    public float maxHP;
+    private float currentHP;
     public int damage;
     public RectTransform hpBar;
     public float secondsBetweenShots;
+    public float hpBarSize;
 
+    public bool canAttack = false;
     private float timestamp;
     private Transform player;
-    private float hpBarSize;
     Vector3 originalPos;
 
     // Use this for initialization
@@ -25,6 +26,13 @@ public class Enemy : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindWithTag("Player").transform;
 
+        currentHP = maxHP;
+
+        //Initialize the hp Bar
+        float hpBarSize = (currentHP / maxHP) * 100;
+        hpBar.sizeDelta = new Vector2(hpBarSize * 2, hpBar.sizeDelta.y);
+        
+        //Position for the enemy to return too if the player distance is too far
         originalPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
     }
 	
@@ -32,45 +40,46 @@ public class Enemy : MonoBehaviour {
 	void Update () {
         Dead();
         FollowHero();
-	}
+    }
 
     void FollowHero()
     {
-        Debug.DrawRay(transform.position, player.position, Color.yellow);
+
         float distance = Vector3.Distance(player.position, transform.position);
 
+        //Postie van de player voor als de enemy ernaar moet draaien
+        Vector3 playerPosition = new Vector3(player.position.x, transform.position.y, player.position.z);
+
+        //Bij welke distance moet wat gebeuren
         if(player != null)
         {
-            if (distance <= 5 && agent)
+            if (distance <= 5 && distance >= 2 && agent)
             {
                 agent.SetDestination(player.position);
-                if(Time.time >= timestamp)
+            }
+            else if(distance <= 2 && agent)
+            {
+                transform.LookAt(playerPosition);
+
+                if (Time.time >= timestamp)
                 {
                     Attack();
                 }
             }
-            else if (distance >= 5)
+            else if (distance >= 5 && agent)
             {
                 agent.SetDestination(originalPos);
             }
         }
     }
 
+    //Damage de hero en reset de reload
     void Attack()
     {
-        RaycastHit hit;
+           hero = player.GetComponent<PlayerController>();
+           hero.Damage(damage);
 
-        int layermask = LayerMask.GetMask("Player");
-
-        if (Physics.Raycast(transform.position, player.position, out hit, 2f, layermask))
-        {
-            hero = hit.collider.GetComponent<PlayerController>();
-            hero.Damage(damage);
-            Debug.Log("Hit Player");
-        }
-
-        timestamp = Time.time + secondsBetweenShots;
-
+           timestamp = Time.time + secondsBetweenShots;
     }
 
     //Ga weg als de hp aan 0 is of eronder
@@ -87,6 +96,9 @@ public class Enemy : MonoBehaviour {
     {
         currentHP -= damage;
 
-        hpBar.sizeDelta = new Vector2(currentHP * 2 ,hpBar.sizeDelta.y);
+        hpBarSize = (currentHP / maxHP) * 100;
+
+        hpBar.sizeDelta = new Vector2(hpBarSize * 2,hpBar.sizeDelta.y);
+        //Debug.Log(currentHP + " currentHP / " + maxHP + " MaxHP = " + currentHP/maxHP + " * 100 = " + hpBarSize);
     }
 }
