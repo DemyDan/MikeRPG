@@ -16,8 +16,11 @@ public class Enemy : MonoBehaviour {
     public RectTransform hpBar;
     public float secondsBetweenShots;
     public float hpBarSize;
-
+    public float viewRange = 5;
+    public float attackRange = 2;
     public bool canAttack = false;
+    public Rigidbody item;
+
     private float timestamp;
     private Transform player;
     Vector3 originalPos;
@@ -54,12 +57,12 @@ public class Enemy : MonoBehaviour {
         //Bij welke distance moet wat gebeuren
         if(player != null)
         {
-            if (distance <= 5 && distance >= 2 && agent)
+            if (distance <= viewRange && distance >= attackRange && agent)
             {
                 agent.SetDestination(player.position);
                 anim.SetFloat("Walk", 2);
             }
-            else if(distance <= 2 && agent)
+            else if(distance <= attackRange && agent)
             {
                 transform.LookAt(playerPosition);
                 anim.SetFloat("Walk", 0);
@@ -68,7 +71,7 @@ public class Enemy : MonoBehaviour {
                     Attack();
                 }
             }
-            else if (distance >= 5 && agent)
+            else if (distance >= viewRange && agent)
             {
                 agent.SetDestination(originalPos);
             }
@@ -91,6 +94,7 @@ public class Enemy : MonoBehaviour {
         if(currentHP <= 0)
         {
             Destroy(gameObject);
+            Rigidbody itemDrop = Instantiate(item, transform.position, transform.rotation);
         }
     }
 

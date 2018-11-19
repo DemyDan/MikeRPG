@@ -2871,7 +2871,10 @@ MonoBehaviour:
   hpBar: {fileID: 224399551015485256}
   secondsBetweenShots: 1
   hpBarSize: 0
+  viewRange: 5
+  attackRange: 2
   canAttack: 0
+  item: {fileID: 0}
 --- !u!114 &114554514193741294
 MonoBehaviour:
   m_ObjectHideFlags: 1

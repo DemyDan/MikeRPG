@@ -103,10 +103,14 @@ public class PlayerController : MonoBehaviour {
         Cursor.visible = false;
 
         if (Input.GetKey(KeyCode.Escape))
-            Cursor.lockState = CursorLockMode.None; 
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
         else
+        {
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 
     public void Damage(int damage)

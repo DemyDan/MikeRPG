@@ -27,11 +27,6 @@ public class WandWeapon : MonoBehaviour {
 
     void Shoot()
     {
-        //Pakt de rechter kant van de vector
-        Vector3 newRight = Vector3.Cross(Vector3.up, transform.forward);
-
-        //Pakt de voorkant van de vector
-        Vector3 newForward = Vector3.Cross(newRight, Vector3.up);
 
         if (Input.GetButtonDown("Fire1") && player.GetComponent<Interact>().playerHasWeapon && player.GetComponent<Interact>().playerHasWand && Time.time >= timestamp)
         {
