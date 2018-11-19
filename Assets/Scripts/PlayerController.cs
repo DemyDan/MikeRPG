@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     CharacterController cc;
+    Interact interact;
+    Animator anim;
 
     public Transform cam;
 
@@ -24,12 +26,15 @@ public class PlayerController : MonoBehaviour {
         playerStill = this.transform.rotation.y;
 
         cc = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>();
+        interact = GetComponent<Interact>();
     }
 
     void Update()
     {
         ControlCursor();
         Move();
+        Animate();
     }
 
     void Move()
@@ -70,6 +75,27 @@ public class PlayerController : MonoBehaviour {
 
         //Pak de rotatie van de player en maak die op de y as hetzelfde als die van de camera
         transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y, 0);
+    }
+    
+    void Animate()
+    {
+        if(Input.GetKey("w"))
+        {
+            anim.SetFloat("Walk", 2);
+        }
+        else
+        {
+            anim.SetFloat("Walk", 0);
+        }
+
+        if (Input.GetMouseButtonDown(0) && interact.playerHasWeapon)
+        {
+            anim.SetFloat("Attack", 2);
+        }
+        else
+        {
+            anim.SetFloat("Attack", 0);
+        }
     }
 
     void ControlCursor()

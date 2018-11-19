@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour {
 
     NavMeshAgent agent;
     PlayerController hero;
+    Animator anim;
 
     public float maxHP;
     private float currentHP;
@@ -24,11 +25,11 @@ public class Enemy : MonoBehaviour {
     // Use this for initialization
     void Start () {
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
         player = GameObject.FindWithTag("Player").transform;
 
+        //Initialize the hp
         currentHP = maxHP;
-
-        //Initialize the hp Bar
         float hpBarSize = (currentHP / maxHP) * 100;
         hpBar.sizeDelta = new Vector2(hpBarSize * 2, hpBar.sizeDelta.y);
         
@@ -56,11 +57,12 @@ public class Enemy : MonoBehaviour {
             if (distance <= 5 && distance >= 2 && agent)
             {
                 agent.SetDestination(player.position);
+                anim.SetFloat("Walk", 2);
             }
             else if(distance <= 2 && agent)
             {
                 transform.LookAt(playerPosition);
-
+                anim.SetFloat("Walk", 0);
                 if (Time.time >= timestamp)
                 {
                     Attack();
@@ -76,10 +78,11 @@ public class Enemy : MonoBehaviour {
     //Damage de hero en reset de reload
     void Attack()
     {
-           hero = player.GetComponent<PlayerController>();
-           hero.Damage(damage);
+        hero = player.GetComponent<PlayerController>();
+        hero.Damage(damage);
+        anim.SetTrigger("Attack"); 
 
-           timestamp = Time.time + secondsBetweenShots;
+        timestamp = Time.time + secondsBetweenShots;
     }
 
     //Ga weg als de hp aan 0 is of eronder
@@ -87,7 +90,7 @@ public class Enemy : MonoBehaviour {
     {
         if(currentHP <= 0)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 

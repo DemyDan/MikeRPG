@@ -45,7 +45,7 @@ public class BowWeapon : MonoBehaviour {
 
             Rigidbody arrow = Instantiate(bullet, shootPoint, transform.rotation);
 
-            arrow.AddForce(arrowSpeed * -transform.forward);
+            arrow.AddForce(arrowSpeed * player.transform.forward);
 
             timestamp = Time.time + secondsBetweenShots;
         }

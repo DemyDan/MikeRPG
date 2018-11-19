@@ -39,7 +39,7 @@ public class WandWeapon : MonoBehaviour {
 
             Rigidbody arrow = Instantiate(bullet, shootPoint, transform.rotation);
 
-            arrow.AddForce(arrowSpeed * -newForward);
+            arrow.AddForce(arrowSpeed * player.transform.forward);
 
             timestamp = Time.time + secondsBetweenShots;
         }
