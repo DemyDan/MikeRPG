@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class ItemPickUp : MonoBehaviour
 {
-
+    private GameObject player;
     public bool playerIsNearby;
+
+    void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+    }
 
     [TextArea]
     public string text = "";

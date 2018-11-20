@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Interact : MonoBehaviour {
 
+    public Camera cam;
+    public GameObject keyPlace;
+
+    public bool playerSeesItem = false;
     public bool playerIsWithItem = false;
     public bool playerHasWeapon = false;
     public bool playerHasBow = false;
@@ -21,7 +25,32 @@ public class Interact : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         DropWeapon();
+        CheckItem();
 	}
+
+    void CheckItem()
+    {
+        RaycastHit hit;
+
+        if(Physics.Raycast(transform.position, transform.forward, out hit, 2f))
+        {
+            if(hit.collider.CompareTag("Item"))
+            {
+                playerSeesItem = true;
+                if(Input.GetKeyDown("e"))
+                {
+                    Debug.Log("Got Object");
+                    hit.collider.gameObject.transform.position = keyPlace.transform.position;
+                    hit.collider.gameObject.transform.parent = keyPlace.transform;
+                }
+            }
+            Debug.DrawRay(transform.position, transform.forward * 2f, Color.yellow);
+        }
+        else
+        {
+            playerSeesItem = false;
+        }
+    }
 
     void DropWeapon()
     {

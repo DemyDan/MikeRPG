@@ -63,6 +63,9 @@
      <Compile Include="Assets\Assets\Fantasy Skybox FREE\Demo\Scripts\GE_FantasySkyboxFREE_UIs.cs" />
      <Compile Include="Assets\Assets\RPGPackFree\Scripts\BowString.cs" />
      <Compile Include="Assets\Assets\RPGPackFree\Scripts\OpenChest.cs" />
+     <Compile Include="Assets\BossDied.cs" />
+     <Compile Include="Assets\KeyOpen.cs" />
+     <Compile Include="Assets\PlayerTrigger.cs" />
      <Compile Include="Assets\Scripts\Arrow.cs" />
      <Compile Include="Assets\Scripts\Billboard.cs" />
      <Compile Include="Assets\Scripts\BowWeapon.cs" />
@@ -79,7 +82,9 @@
      <None Include="Assets\Assets\Fantasy Skybox FREE\Readme.txt" />
      <None Include="Assets\Assets\Characters\Earthborn Troll\Shader\DoubleSided-Light-Spec.shader" />
      <None Include="Assets\Assets\Fantasy Skybox FREE\Fog and Ambient references.txt" />
+     <None Include="Assets\Assets\Smith\Documents\Village_Interiors_User_Guid_v1.3.txt" />
      <None Include="Assets\Assets\Characters\Knight\shaders\doublesidedshader.shader" />
+     <None Include="Assets\Assets\Characters\Toon Mouse Spear\readMe.txt" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>D:/Github_Projects/MikeRPG/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>

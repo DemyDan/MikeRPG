@@ -94,7 +94,10 @@ public class Enemy : MonoBehaviour {
         if(currentHP <= 0)
         {
             Destroy(gameObject);
-            Rigidbody itemDrop = Instantiate(item, transform.position, transform.rotation);
+            if(item != null)
+            {
+               Rigidbody itemDrop = Instantiate(item, transform.position, transform.rotation);
+            }
         }
     }
 
