@@ -5,7 +5,7 @@ using UnityEngine;
 public class KeyOpen : MonoBehaviour {
 
     private GameObject player;
-    string trollKey = "TrollKey";
+    string trollKey = "TrollKey(Clone)";
     string bossKey = "BossKey";
 
     // Use this for initialization

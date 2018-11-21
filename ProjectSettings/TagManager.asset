@@ -12,6 +12,7 @@ TagManager:
   - Wand
   - DoorTroll
   - DoorBoss
+  - Wall
   layers:
   - Default
   - TransparentFX
