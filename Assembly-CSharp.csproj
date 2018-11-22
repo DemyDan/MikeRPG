@@ -73,6 +73,7 @@
      <Compile Include="Assets\CannonBall.cs" />
      <Compile Include="Assets\CannonShoot.cs" />
      <Compile Include="Assets\KeyOpen.cs" />
+     <Compile Include="Assets\MenuButtons.cs" />
      <Compile Include="Assets\PlayerTrigger.cs" />
      <Compile Include="Assets\Scripts\Arrow.cs" />
      <Compile Include="Assets\Scripts\Billboard.cs" />
